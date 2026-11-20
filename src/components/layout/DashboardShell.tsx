@@ -12,8 +12,10 @@ import {
   Menu,
   X,
   ShieldCheck,
+  HelpCircle,
 } from 'lucide-react';
 import { useAuth } from '@/components/providers/AuthProvider';
+import { HelpDrawer } from '@/components/layout/HelpDrawer';
 
 const NAV_ITEMS = [
   { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
@@ -25,6 +27,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { user, logout } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-slate-50 flex">
@@ -172,7 +175,16 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
+            <button
+              type="button"
+              onClick={() => setHelpOpen(true)}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-medium text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 border border-slate-200/80 hover:border-indigo-200 transition-colors cursor-pointer"
+              title="Open User Guide"
+            >
+              <HelpCircle className="w-4 h-4" />
+              <span className="hidden sm:inline">Help Guide</span>
+            </button>
             <span className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700">
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
               Admin Session
@@ -182,6 +194,8 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
 
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">{children}</main>
       </div>
+
+      <HelpDrawer isOpen={helpOpen} onClose={() => setHelpOpen(false)} />
     </div>
   );
 }
