@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -26,7 +26,7 @@ import { ActionMenu } from '@/components/ui/ActionMenu';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { Patient } from '@/types';
 
-export default function PatientsPage() {
+function PatientsContent() {
   const queryClient = useQueryClient();
   const searchParams = useSearchParams();
   const initialCondition = searchParams.get('condition') || 'all';
@@ -377,5 +377,13 @@ export default function PatientsPage() {
         variant="danger"
       />
     </div>
+  );
+}
+
+export default function PatientsPage() {
+  return (
+    <Suspense fallback={<div className="h-64 flex items-center justify-center text-slate-400 text-sm">Loading patients...</div>}>
+      <PatientsContent />
+    </Suspense>
   );
 }
