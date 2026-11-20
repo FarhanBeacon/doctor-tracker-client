@@ -1,7 +1,7 @@
 # Doctor Tracker — Healthcare Administrative Portal
 
-> **Live Demo:** `[Add your deployed Vercel Frontend URL here]`  
-> **Backend API:** `[Add your deployed Vercel Backend URL here]`  
+> **Live Demo:** https://doctor-tracker-client-kappa.vercel.app  
+> **Backend API:** https://doctor-tracker-server-indol.vercel.app  
 > **Demo Admin Credentials:** `admin@doctortracker.com` / `Password123!`
 
 ---
